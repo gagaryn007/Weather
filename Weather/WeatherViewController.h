@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ObservedCity.h"
 #import "SWRevealViewController.h"
+#import "ColorSelector.h"
 
 @interface WeatherViewController : UIViewController
 

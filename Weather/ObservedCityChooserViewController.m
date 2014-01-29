@@ -93,21 +93,23 @@
     weatherSecondLabel.text = @"";
         
     NSBundle *bundle = [NSBundle mainBundle];
+    NSDictionary *signsDictionary = nil;
+    NSString *timeOfDay = nil;
+    BOOL flag = YES;
     int index = 0;
     for (Weather *weather in city.weatherConditions.weather) {
-        static NSDictionary *signsDictionary = nil;
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
+        if (flag) {
+            flag = NO;
             NSString *signsDictionaryPath = nil;
-            NSString *lastLetter = [weather.desc substringWithRange:NSMakeRange([weather.desc length] - 1, 1)];
-            if ([lastLetter isEqualToString:@"d"]) {
+            timeOfDay = [weather.icon substringWithRange:NSMakeRange([weather.icon length] - 1, 1)];
+            if ([timeOfDay isEqualToString:@"d"]) {
                 signsDictionaryPath = [bundle pathForResource:@"Weather-day-images" ofType:@"plist"];
             } else {
                 signsDictionaryPath = [bundle pathForResource:@"Weather-night-images" ofType:@"plist"];
             }
             
             signsDictionary = [[NSDictionary alloc] initWithContentsOfFile:signsDictionaryPath];
-        });
+        }
         
         if (index == 0) {
             weatherFirstLabel.text = [signsDictionary objectForKey:[weather.identifier stringValue]];
@@ -117,6 +119,8 @@
         
         index++;
     }
+    
+    cell.backgroundColor = [[[ColorSelector alloc] init] colorForTemperature:city.weatherConditions.temp andTimeOfDay:timeOfDay];
     
     if ([self.selectionList containsObject:city]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

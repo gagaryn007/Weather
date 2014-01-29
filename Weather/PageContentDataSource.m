@@ -77,6 +77,7 @@
 
 - (NSUInteger)count
 {
+//    return 0;
     return [self.cityList count];
 }
 

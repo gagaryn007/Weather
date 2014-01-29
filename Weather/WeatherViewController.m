@@ -7,6 +7,7 @@
 //
 
 #import "WeatherViewController.h"
+#import "AppDelegate.h"
 
 @interface WeatherViewController ()
 
@@ -14,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tempLabel;
 @property (weak, nonatomic) IBOutlet UITextView *fullInfoTextView;
+@property (weak, nonatomic) IBOutlet UITextView *fullInfoLegendTextView;
 @property (weak, nonatomic) IBOutlet UILabel *leftWeatherDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *centerWeatherDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightWeatherDescriptionLabel;
@@ -51,7 +53,9 @@
     self.fullInfoTextView.attributedText = [self stringFromFullInfo];
     self.tempLabel.text = [NSString stringWithFormat:@"%.1lf°C", ([self.city.weatherConditions.temp doubleValue] - 273.15)];
     
-    NSBundle *bundle = [NSBundle mainBundle];
+    BOOL flag = YES;
+    NSString *timeOfDay = nil;
+    NSDictionary *signsDictionary = nil;
     UIFont *font = [UIFont fontWithName:@"Weather&Time" size:144];
     if ([self.city.weatherConditions.weather count] == 1) {
         self.leftWeatherDescriptionLabel.text = @"";
@@ -62,20 +66,12 @@
         for (Weather *weather in self.city.weatherConditions.weather) {
             self.centerWeatherDescriptionLabel.text = [weather.desc capitalizedString];
             self.centerWeatherLabel.font = font;
-            
-            static NSDictionary *signsDictionary = nil;
-            static dispatch_once_t onceToken;
-            dispatch_once(&onceToken, ^{
-                NSString *signsDictionaryPath = nil;
-                NSString *lastLetter = [weather.desc substringWithRange:NSMakeRange([weather.desc length] - 1, 1)];
-                if ([lastLetter isEqualToString:@"d"]) {
-                    signsDictionaryPath = [bundle pathForResource:@"Weather-day-images" ofType:@"plist"];
-                } else {
-                    signsDictionaryPath = [bundle pathForResource:@"Weather-night-images" ofType:@"plist"];
-                }
-                
-                signsDictionary = [[NSDictionary alloc] initWithContentsOfFile:signsDictionaryPath];
-            });
+        
+            if (flag) {
+                flag = NO;
+                timeOfDay = [self timeOfDayForIcon:weather.icon];
+                signsDictionary = [self signsDictionaryForTimeOfDay:timeOfDay];
+            }
             
             self.centerWeatherLabel.text = [signsDictionary objectForKey:[weather.identifier stringValue]];
         }
@@ -85,19 +81,11 @@
         
         int index = 0;
         for (Weather *weather in self.city.weatherConditions.weather) {
-            static NSDictionary *signsDictionary = nil;
-            static dispatch_once_t onceToken;
-            dispatch_once(&onceToken, ^{
-                NSString *signsDictionaryPath = nil;
-                NSString *lastLetter = [weather.desc substringWithRange:NSMakeRange([weather.desc length] - 1, 1)];
-                if ([lastLetter isEqualToString:@"d"]) {
-                    signsDictionaryPath = [bundle pathForResource:@"Weather-day-images" ofType:@"plist"];
-                } else {
-                    signsDictionaryPath = [bundle pathForResource:@"Weather-night-images" ofType:@"plist"];
-                }
-                
-                signsDictionary = [[NSDictionary alloc] initWithContentsOfFile:signsDictionaryPath];
-            });
+            if (flag) {
+                flag = NO;
+                timeOfDay = [self timeOfDayForIcon:weather.icon];
+                signsDictionary = [self signsDictionaryForTimeOfDay:timeOfDay];
+            }
             
             if (index == 0) {
                 self.leftWeatherDescriptionLabel.text = [weather.desc capitalizedString];
@@ -112,6 +100,14 @@
             index++;
         }
     }
+    
+    ColorSelector *colorSelector = [[ColorSelector alloc] init];
+    
+    NSNumber *temp = self.city.weatherConditions.temp;
+    UIColor *color = [colorSelector colorForTemperature:temp andTimeOfDay:timeOfDay];
+    self.fullInfoTextView.backgroundColor = color;
+    self.fullInfoLegendTextView.backgroundColor = color;
+    self.view.backgroundColor = color;
 }
 
 - (NSAttributedString *)stringFromFullInfo
@@ -146,7 +142,8 @@
     
     NSMutableParagraphStyle *paragrapStyle = [[NSMutableParagraphStyle alloc] init];
     paragrapStyle.alignment = NSTextAlignmentRight;
-    NSDictionary *attributes = @{NSParagraphStyleAttributeName: paragrapStyle};
+    
+    NSDictionary *attributes = @{NSParagraphStyleAttributeName: paragrapStyle, NSForegroundColorAttributeName : [UIColor whiteColor]};
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:result attributes:attributes];
     
     return attributedString;
@@ -231,6 +228,24 @@
     formatter.dateFormat = @"HH:mm";
     
     return [formatter stringFromDate:date];
+}
+
+- (NSString *)timeOfDayForIcon:(NSString *)icon
+{
+    return [icon substringWithRange:NSMakeRange([icon length] - 1, 1)];
+}
+
+- (NSDictionary *)signsDictionaryForTimeOfDay:(NSString *)timeOfDay
+{
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *signsDictionaryPath = nil;
+    if ([timeOfDay isEqualToString:@"d"]) {
+        signsDictionaryPath = [bundle pathForResource:@"Weather-day-images" ofType:@"plist"];
+    } else {
+        signsDictionaryPath = [bundle pathForResource:@"Weather-night-images" ofType:@"plist"];
+    }
+    
+    return [[NSDictionary alloc] initWithContentsOfFile:signsDictionaryPath];
 }
 
 - (BOOL)shouldUpdateWeather:(ObservedCity *)city

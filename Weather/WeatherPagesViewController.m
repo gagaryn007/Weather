@@ -7,6 +7,7 @@
 //
 
 #import "WeatherPagesViewController.h"
+#import "ColorSelector.h"
 
 @interface WeatherPagesViewController ()
 
@@ -41,14 +42,14 @@
         [voidViewController didMoveToParentViewController:self];
     } else {
         self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"page_view_controller"];
-        //    self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 30);
+        self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         self.pageContentDataSource = [[PageContentDataSource alloc] init];
         [self.pageContentDataSource setStoryboard:self.storyboard];
         [self.pageViewController setDataSource:self.pageContentDataSource];
     
         WeatherViewController *weatherViewController = [self.pageContentDataSource viewControllerAtIndex:0];
         NSArray *controllers = @[weatherViewController];
-        [self.pageViewController setViewControllers:controllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        [self.pageViewController setViewControllers:controllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     
         [self addChildViewController:self.pageViewController];
         [self.view addSubview:self.pageViewController.view];
@@ -60,6 +61,5 @@
 {
     [super didReceiveMemoryWarning];
 }
-
 
 @end

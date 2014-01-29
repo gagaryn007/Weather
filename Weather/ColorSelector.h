@@ -11,4 +11,6 @@
 
 @interface ColorSelector : NSObject
 
+- (UIColor *)colorForTemperature:(NSNumber *)kelvinTemp andTimeOfDay:(NSString *)timeOfDay;
+
 @end

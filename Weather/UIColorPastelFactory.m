@@ -54,12 +54,12 @@
     return [self colorWithRed:154 green:209 blue:207];
 }
 
-- (UIColor *)grey
+- (UIColor *)violet
 {
     return [self colorWithRed:48 green:39 blue:53];
 }
 
-- (UIColor *)violet
+- (UIColor *)grey
 {
     return [self colorWithRed:150 green:162 blue:177];
 }
