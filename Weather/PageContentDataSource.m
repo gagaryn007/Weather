@@ -10,7 +10,7 @@
 
 @interface PageContentDataSource()
 
-@property (strong, nonatomic) NSArray *cityList;
+@property (strong, nonatomic) NSMutableArray *cityList;
 
 @end
 
@@ -21,7 +21,7 @@
     self = [super init];
     if (self != nil) {
         CoreDataObservedCityHelper *helper = [[CoreDataObservedCityHelper alloc] init];
-        self.cityList = [helper listOfCities];
+        self.cityList = [[helper listOfCities] mutableCopy];
     }
     
     return self;
@@ -29,12 +29,16 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    NSUInteger index = ((WeatherViewController *) viewController).index;
+    NSUInteger index;
+    if ([viewController isKindOfClass:[WeatherViewController class]]) {
+        index = ((WeatherViewController *) viewController).index;
+    } else {
+        index = 0;
+    }
+    
     if (index == NSNotFound) {
         return nil;
     }
-    
-    [UIColor colorWithRed:255 green:255 blue:255 alpha:100];
     
     index++;
     return [self viewControllerAtIndex:index];
@@ -42,7 +46,13 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    NSUInteger index = ((WeatherViewController *) viewController).index;
+    NSUInteger index;
+    if ([viewController isKindOfClass:[WeatherViewController class]]) {
+        index = ((WeatherViewController *) viewController).index;
+    } else {
+        index = 0;
+    }
+    
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
     }
@@ -65,6 +75,20 @@
     return contentViewController;
 }
 
+- (WeatherViewController *)removeCity:(ObservedCity *)city
+{
+    int index = [self.cityList indexOfObject:city];
+    [self.cityList removeObject:city];
+    
+    if (index < [self.cityList count]) {
+        return [self viewControllerAtIndex:index+1];
+    } else {
+        return [self viewControllerAtIndex:index-1];
+    }
+
+    return nil;
+}
+
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
 {
     return [self.cityList count];
@@ -77,7 +101,6 @@
 
 - (NSUInteger)count
 {
-//    return 0;
     return [self.cityList count];
 }
 

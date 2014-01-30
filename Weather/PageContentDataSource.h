@@ -16,5 +16,6 @@
 
 - (WeatherViewController *)viewControllerAtIndex:(NSUInteger) index;
 - (NSUInteger)count;
+- (WeatherViewController *)removeCity:(ObservedCity *)city;
 
 @end

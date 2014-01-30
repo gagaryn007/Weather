@@ -11,6 +11,6 @@
 #import "PageContentDataSource.h"
 #import "SWRevealViewController.h"
 
-@interface WeatherPagesViewController : UIViewController
+@interface WeatherPagesViewController : UIViewController <UIAlertViewDelegate>
 
 @end

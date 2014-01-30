@@ -107,9 +107,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hxl-26-3fS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1474" y="1345"/>
+            <point key="canvasLocation" x="1487" y="1337"/>
         </scene>
-        <!--Weather Pages View Controller-->
+        <!--Weather Pages View Controller - Weather now-->
         <scene sceneID="FfO-Mt-heM">
             <objects>
                 <viewController id="u91-Wz-Vt4" customClass="WeatherPagesViewController" sceneMemberID="viewController">
@@ -122,11 +122,17 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="BOd-br-GMp">
+                    <navigationItem key="navigationItem" title="Weather now" id="BOd-br-GMp">
                         <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" id="vJn-r1-hx6"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="ta9-bL-Q8R">
+                            <connections>
+                                <action selector="didClickTrashButton:" destination="u91-Wz-Vt4" id="gHh-Ex-wU9"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="sidebarButton" destination="vJn-r1-hx6" id="HHy-FA-lz0"/>
+                        <outlet property="trashButton" destination="ta9-bL-Q8R" id="r7Q-u7-Wu6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xVp-Wh-2oo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -141,7 +147,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="u91-Wz-Vt4" kind="relationship" relationship="rootViewController" id="BcB-lt-O5G"/>
+                        <segue destination="u91-Wz-Vt4" kind="relationship" relationship="rootViewController" id="Evh-Uy-6ok"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhO-og-je6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -287,7 +293,7 @@ NW
             </objects>
             <point key="canvasLocation" x="1897" y="641"/>
         </scene>
-        <!--Observed City Chooser View Controller - Search city-->
+        <!--Observed City Chooser View Controller - Find city-->
         <scene sceneID="UK6-Fb-j94">
             <objects>
                 <tableViewController id="toZ-8X-RVk" customClass="ObservedCityChooserViewController" sceneMemberID="viewController">
@@ -346,7 +352,7 @@ NW
                             <outlet property="delegate" destination="toZ-8X-RVk" id="fcz-6G-cYO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Search city" id="oOm-HA-f0D">
+                    <navigationItem key="navigationItem" title="Find city" id="oOm-HA-f0D">
                         <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" id="cJB-YI-XPC"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="dtD-ra-nJG">
                             <connections>
@@ -426,7 +432,7 @@ NW
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="BcB-lt-O5G"/>
+        <segue reference="Evh-Uy-6ok"/>
         <segue reference="6Mx-vO-Czq"/>
     </inferredMetricsTieBreakers>
 </document>

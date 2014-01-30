@@ -188,8 +188,8 @@
 				2C54087E189450E700B7E383 /* WeatherConditions.m */,
 				2C540880189450FC00B7E383 /* Wind.h */,
 				2C540881189450FC00B7E383 /* Wind.m */,
-				2C894BAD1895286D006F2AD2 /* SunInfo.h */,
 				2C894BAE1895286D006F2AD2 /* SunInfo.m */,
+				2C894BAD1895286D006F2AD2 /* SunInfo.h */,
 			);
 			name = Containers;
 			sourceTree = "<group>";

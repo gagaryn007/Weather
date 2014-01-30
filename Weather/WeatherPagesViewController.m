@@ -14,7 +14,9 @@
 @property (strong, nonatomic) NSArray *titles;
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong, nonatomic) PageContentDataSource *pageContentDataSource;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *trashButton;
 
 @end
 
@@ -40,9 +42,11 @@
         [self addChildViewController:voidViewController];
         [self.view addSubview:voidViewController.view];
         [voidViewController didMoveToParentViewController:self];
+        
+        self.trashButton.enabled = NO;
     } else {
         self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"page_view_controller"];
-        self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+//        self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         self.pageContentDataSource = [[PageContentDataSource alloc] init];
         [self.pageContentDataSource setStoryboard:self.storyboard];
         [self.pageViewController setDataSource:self.pageContentDataSource];
@@ -54,12 +58,46 @@
         [self addChildViewController:self.pageViewController];
         [self.view addSubview:self.pageViewController.view];
         [self.pageViewController didMoveToParentViewController:self];
+        
+        self.trashButton.enabled = YES;
     }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (IBAction)didClickTrashButton:(id)sender {
+    WeatherViewController *weather = (WeatherViewController *)[self.pageViewController.viewControllers lastObject];
+    
+    NSString *message = [[NSString alloc] initWithFormat:@"Do you want to delete %@?", weather.city.cityName];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete" message:message delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        WeatherViewController *weatherViewController = (WeatherViewController *) [self.pageViewController.viewControllers lastObject];
+
+        [self.pageContentDataSource removeCity:weatherViewController.city];
+        
+        UIViewController *viewController = [self.pageContentDataSource pageViewController:self.pageViewController viewControllerAfterViewController:weatherViewController];
+        if (viewController == nil) {
+            viewController = [self.pageContentDataSource pageViewController:self.pageViewController viewControllerBeforeViewController:weatherViewController];
+        }
+        
+        if (viewController == nil) {
+            viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"void_view_controller"];
+            self.trashButton.enabled = NO;
+        }
+        
+        [self.pageViewController setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        [weatherViewController.view removeFromSuperview];
+        [weatherViewController removeFromParentViewController];
+        [self.pageViewController reloadInputViews];
+    }
 }
 
 @end

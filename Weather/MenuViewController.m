@@ -29,6 +29,7 @@
     
     self.ids = @[@"weather_now", @"your_localization", @"find_city"];
     self.titles = @[@"Weather now", @"Your localization", @"Find city"];
+    self.tableView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.5];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,6 +53,8 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self.ids objectAtIndex:indexPath.row] forIndexPath:indexPath];
     cell.textLabel.text = [self.titles objectAtIndex:indexPath.row];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0];
     
     return cell;
 }
