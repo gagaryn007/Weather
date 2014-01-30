@@ -75,18 +75,9 @@
     return contentViewController;
 }
 
-- (WeatherViewController *)removeCity:(ObservedCity *)city
+- (void)removeCity:(ObservedCity *)city
 {
-    int index = [self.cityList indexOfObject:city];
     [self.cityList removeObject:city];
-    
-    if (index < [self.cityList count]) {
-        return [self viewControllerAtIndex:index+1];
-    } else {
-        return [self viewControllerAtIndex:index-1];
-    }
-
-    return nil;
 }
 
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
