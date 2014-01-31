@@ -14,6 +14,20 @@
 
 @implementation WeatherForecastViewController
 
+- (void)explicitConnectionDidFinishedWithSucces:(NSDictionary *)obj
+{
+    NSLog(@"%@", obj);
+}
+
+- (void)likeConnectionDidFinishedWithSucces:(NSArray *)cityList
+{
+}
+
+- (void)didFailWithError:(NSError *)error
+{
+    
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -23,6 +37,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    WeatherConnectionHelper *helper = [[WeatherConnectionHelper alloc] init];
+    helper.delegate = self;
+    
+    [helper makeForecastRequest:self.city.cityId];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +64,7 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.textLabel.text = self.city.cityName;
     
     return cell;
 }

@@ -29,6 +29,8 @@
         
         NSArray *weatherArray = [Weather weatherFromNSJSONArray:[dictionary objectForKey:@"weather"]];
         self.weather = [[NSSet alloc] initWithArray:weatherArray];
+        
+        self.updateDate = [NSDate date];
     }
     return self;
 }

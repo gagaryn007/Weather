@@ -38,6 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     if ([self shouldUpdateWeather:self.city]) {
         self.loadingViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loading_view_controller"];
         [self addChildViewController:self.loadingViewController];
@@ -46,7 +47,7 @@
         
         WeatherConnectionHelper *helper = [[WeatherConnectionHelper alloc] init];
         helper.delegate = self;
-        [helper makeExplicitRequestWithLocations:[self.city.lat doubleValue] lon:[self.city.lon doubleValue]];
+        [helper makeExplicitRequest:self.city.cityId];
     } else {
         self.loadingViewController = nil;
         
@@ -77,10 +78,12 @@
     [self.loadingViewController removeFromParentViewController];
     self.loadingViewController = nil;
     
-    city.identifier = self.city.identifier;
     self.city = city;
     
-    [[[CoreDataObservedCityHelper alloc] init] updateObservedCity:self.city withIdentifier:self.city.identifier];
+    CoreDataObservedCityHelper *helper = [[CoreDataObservedCityHelper alloc] init];
+    if ([helper containsCity:self.city]) {
+        [helper updateObservedCity:city];
+    }
     
     [self updateLayout];
     [self.view setNeedsDisplay];
@@ -293,7 +296,7 @@
 - (BOOL)shouldUpdateWeather:(ObservedCity *)city
 {
     NSDate *dateNow = [NSDate date];
-    NSDate *updateDate = city.weatherConditions.date;
+    NSDate *updateDate = city.weatherConditions.updateDate;
     
     NSDateComponents *offset = [NSDateComponents new];
     offset.hour = 0;

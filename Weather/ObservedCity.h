@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Forecast.h"
 #import "WeatherConditions.h"
 #import "SunInfo.h"
 
@@ -18,7 +19,8 @@
 @property (strong, nonatomic) SunInfo *sunInfo;
 @property (strong, nonatomic) NSNumber *lat;
 @property (strong, nonatomic) NSNumber *lon;
-@property (strong, nonatomic) NSNumber *identifier;
+@property (strong, nonatomic) Forecast *forecast;
+@property (strong, nonatomic) NSNumber *cityId;
 
 - (id) initWithNSJSONDictionary:(NSDictionary *) dictionary;
 

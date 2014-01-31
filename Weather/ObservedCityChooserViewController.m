@@ -139,8 +139,13 @@
         [self.selectionList removeObject:selectedCity];
         [self.helper removeObservedCity:selectedCity];
     } else {
-        [self.weatherHelper makeExplicitRequest:[NSString stringWithFormat:@"%@,%@", selectedCity.cityName, selectedCity.country]];
-        [self.selectionList addObject:selectedCity];
+        if (![self.helper containsCity:selectedCity]) {
+            [self.weatherHelper makeExplicitRequest:selectedCity.cityId];
+            [self.selectionList addObject:selectedCity];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"City already is observed." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+        }
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

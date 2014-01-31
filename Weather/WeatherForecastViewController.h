@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ObservedCity.h"
+#import "WeatherConnectionHelper.h"
+#import "WeatherConnectionDelegate.h"
 
-@interface WeatherForecastViewController : UITableViewController
+@interface WeatherForecastViewController : UITableViewController <WeatherConnectionDelegate>
+
+@property (strong, nonatomic) ObservedCity *city;
 
 @end

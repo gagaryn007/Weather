@@ -76,7 +76,8 @@
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"weather_forecast_view_controller"];
+    WeatherForecastViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"weather_forecast_view_controller"];
+    viewController.city = [self.cities objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

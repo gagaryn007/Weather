@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSNumber *temp_max;
 @property (nonatomic, strong) Wind *wind;
 @property (nonatomic, strong) NSSet *weather;
+@property (nonatomic, strong) NSDate *updateDate;
 @property (nonatomic, strong) NSDate *date;
 
 - (id) initWithNSJSONDictionary:(NSDictionary *)dictionary;

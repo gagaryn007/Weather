@@ -14,8 +14,9 @@
 
 @property (strong, nonatomic) id <WeatherConnectionDelegate> delegate;
 
-- (void)makeExplicitRequest:(NSString *)city;
+- (void)makeExplicitRequest:(NSNumber *)cityId;
 - (void)makeLikeRequest:(NSString *)city;
 - (void)makeExplicitRequestWithLocations:(double)lat lon:(double)lon;
+- (void)makeForecastRequest:(NSNumber *)cityId;
 
 @end

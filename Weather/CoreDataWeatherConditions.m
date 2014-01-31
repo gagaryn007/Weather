@@ -30,6 +30,7 @@
     [newWeatherConditions setValue:weatherConditions.temp_max forKey:@"temp_max"];
     [newWeatherConditions setValue:weatherConditions.temp_min forKey:@"temp_min"];
     [newWeatherConditions setValue:[[[CoreDataWindHelper alloc] init] addWind:weatherConditions.wind] forKey:@"wind"];
+    [newWeatherConditions setValue:weatherConditions.updateDate forKey:@"updateDate"];
     
     CoreDataWeatherHelper *weatherHelper = [[CoreDataWeatherHelper alloc] init];
     NSMutableArray *weatherArray = [NSMutableArray new];

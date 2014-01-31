@@ -12,7 +12,7 @@
 @protocol WeatherConnectionDelegate <NSObject>
 
 - (void)didFailWithError:(NSError *)error;
-- (void)explicitConnectionDidFinishedWithSucces:(ObservedCity *)city;
-- (void)likeConnectionDidFinishedWithSucces:(NSArray *)cityList;
+- (void)explicitConnectionDidFinishedWithSucces:(id)obj;
+- (void)likeConnectionDidFinishedWithSucces:(NSArray *)list;
 
 @end

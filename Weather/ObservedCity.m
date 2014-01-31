@@ -14,6 +14,8 @@
 {
     self = [super init];
     if (self) {
+        self.cityId = [NSNumber numberWithInt:[[dictionary objectForKey:@"id"] integerValue]];
+        
         NSDictionary *sys = [dictionary objectForKey:@"sys"];
         self.country = [sys objectForKey:@"country"];
         self.sunInfo = [[SunInfo alloc] initWithNSJSONDictionary:sys];

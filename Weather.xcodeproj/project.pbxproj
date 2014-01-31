@@ -22,6 +22,8 @@
 		2C6B4B7F18983A2E00676EBE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6B4B7E18983A2E00676EBE /* CoreLocation.framework */; };
 		2C6B4B8118985BF400676EBE /* Weather-day-images.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C6B4B8018985BF400676EBE /* Weather-day-images.plist */; };
 		2C6B4B8318985CFF00676EBE /* Weather-night-images.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C6B4B8218985CFF00676EBE /* Weather-night-images.plist */; };
+		2C6CDE9A189C1BA700B0CA81 /* Forecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6CDE99189C1BA700B0CA81 /* Forecast.m */; };
+		2C6CDE9D189C1DBA00B0CA81 /* CoreDataForecastHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6CDE9C189C1DBA00B0CA81 /* CoreDataForecastHelper.m */; };
 		2C7FEDA01896AC9900E4F508 /* ObservedCityChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FED9F1896AC9900E4F508 /* ObservedCityChooserViewController.m */; };
 		2C7FEDA51896B30B00E4F508 /* WeatherConnectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FEDA41896B30B00E4F508 /* WeatherConnectionHelper.m */; };
 		2C7FEDA81896CDEC00E4F508 /* Weather&Time.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C7FEDA61896C7EF00E4F508 /* Weather&Time.ttf */; };
@@ -91,6 +93,10 @@
 		2C6B4B7E18983A2E00676EBE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2C6B4B8018985BF400676EBE /* Weather-day-images.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Weather-day-images.plist"; sourceTree = "<group>"; };
 		2C6B4B8218985CFF00676EBE /* Weather-night-images.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Weather-night-images.plist"; sourceTree = "<group>"; };
+		2C6CDE98189C1BA700B0CA81 /* Forecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Forecast.h; sourceTree = "<group>"; };
+		2C6CDE99189C1BA700B0CA81 /* Forecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Forecast.m; sourceTree = "<group>"; };
+		2C6CDE9B189C1DBA00B0CA81 /* CoreDataForecastHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataForecastHelper.h; sourceTree = "<group>"; };
+		2C6CDE9C189C1DBA00B0CA81 /* CoreDataForecastHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataForecastHelper.m; sourceTree = "<group>"; };
 		2C7FED9E1896AC9900E4F508 /* ObservedCityChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObservedCityChooserViewController.h; sourceTree = "<group>"; };
 		2C7FED9F1896AC9900E4F508 /* ObservedCityChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObservedCityChooserViewController.m; sourceTree = "<group>"; };
 		2C7FEDA21896B2FA00E4F508 /* WeatherConnectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherConnectionDelegate.h; sourceTree = "<group>"; };
@@ -243,8 +249,10 @@
 				2C54087E189450E700B7E383 /* WeatherConditions.m */,
 				2C540880189450FC00B7E383 /* Wind.h */,
 				2C540881189450FC00B7E383 /* Wind.m */,
-				2C894BAE1895286D006F2AD2 /* SunInfo.m */,
 				2C894BAD1895286D006F2AD2 /* SunInfo.h */,
+				2C894BAE1895286D006F2AD2 /* SunInfo.m */,
+				2C6CDE98189C1BA700B0CA81 /* Forecast.h */,
+				2C6CDE99189C1BA700B0CA81 /* Forecast.m */,
 			);
 			name = Containers;
 			sourceTree = "<group>";
@@ -262,6 +270,8 @@
 				2C894BB418954915006F2AD2 /* CoreDataWeatherConditions.m */,
 				2C894BB618954B7A006F2AD2 /* CoreDataWindHelper.h */,
 				2C894BB718954B7A006F2AD2 /* CoreDataWindHelper.m */,
+				2C6CDE9B189C1DBA00B0CA81 /* CoreDataForecastHelper.h */,
+				2C6CDE9C189C1DBA00B0CA81 /* CoreDataForecastHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -505,6 +515,8 @@
 				2C54087F189450E700B7E383 /* WeatherConditions.m in Sources */,
 				2C894BB818954B7A006F2AD2 /* CoreDataWindHelper.m in Sources */,
 				2C02E3A1189AE78100C9341B /* ForecastChooserViewController.m in Sources */,
+				2C6CDE9A189C1BA700B0CA81 /* Forecast.m in Sources */,
+				2C6CDE9D189C1DBA00B0CA81 /* CoreDataForecastHelper.m in Sources */,
 				2C894BB21895424F006F2AD2 /* CoreDataSunInfoHelper.m in Sources */,
 				2CA20AFC1891D1D400EC3151 /* AppDelegate.m in Sources */,
 				2CA20AF81891D1D400EC3151 /* main.m in Sources */,

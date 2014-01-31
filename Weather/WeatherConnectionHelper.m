@@ -11,6 +11,8 @@
 @interface WeatherConnectionHelper()
 
 @property (nonatomic) BOOL explicit;
+@property (nonatomic) BOOL forecast;
+
 @property (strong, nonatomic) NSMutableData *receivedData;
 
 @end
@@ -61,12 +63,12 @@
         return;
     }
     
-    if (self.explicit) {
+    if (self.explicit && !self.forecast) {
         ObservedCity *city = [[ObservedCity alloc] initWithNSJSONDictionary:jsonResultDict];
         if (self.delegate != nil) {
             [self.delegate explicitConnectionDidFinishedWithSucces:city];
         }
-    } else {
+    } else if (!self.explicit && !self.forecast) {
         NSMutableArray *cityList = [[NSMutableArray alloc] init];
         NSArray *cityJsonList = [jsonResultDict objectForKey:@"list"];
         for (NSDictionary *dictionary in cityJsonList) {
@@ -77,19 +79,23 @@
         if (self.delegate != nil) {
             [self.delegate likeConnectionDidFinishedWithSucces:cityList];
         }
+    } else if (self.explicit && self.forecast) {
+        NSLog(@"POZDRO");
+        [self.delegate explicitConnectionDidFinishedWithSucces:jsonResultDict];
     }
 }
 
-- (void)makeExplicitRequest:(NSString *)city
+#pragma mark - WeatherConnectionHelper
+
+- (void)makeExplicitRequest:(NSNumber *)cityId
 {
     self.explicit = YES;
     
-    if (city == nil) {
+    if (cityId == nil) {
         return;
     }
     
-    NSString *cityForURL = [city stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSString *query = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@", cityForURL];
+    NSString *query = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?id=%@", cityId];
     
     NSURL *url = [NSURL URLWithString:query];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -99,6 +105,7 @@
 - (void)makeLikeRequest:(NSString *)city
 {
     self.explicit = NO;
+    self.forecast = NO;
     
     if (city == nil) {
         return;
@@ -115,12 +122,23 @@
 - (void)makeExplicitRequestWithLocations:(double)lat lon:(double)lon
 {
     self.explicit = YES;
+    self.forecast = NO;
     
     NSString *query = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%lf&lon=%lf", lat, lon];
     NSURL *url = [NSURL URLWithString:query];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [NSURLConnection connectionWithRequest:request delegate:self];
+}
 
+- (void)makeForecastRequest:(NSNumber *)cityId
+{
+    self.explicit = YES;
+    self.forecast = YES;
+    
+    NSString *query = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast/daily?id=%@&cnt=7", cityId];
+    NSURL *url = [NSURL URLWithString:query];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection connectionWithRequest:request delegate:self];
 }
 
 @end

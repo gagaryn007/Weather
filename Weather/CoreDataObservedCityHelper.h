@@ -10,12 +10,14 @@
 #import "ObservedCity.h"
 #import "CoreDataSunInfoHelper.h"
 #import "CoreDataWeatherConditions.h"
+#import "CoreDataForecastHelper.h"
 #import "WeatherConditions.h"
 
 @interface CoreDataObservedCityHelper : NSObject
 
 - (void)addObservedCity:(ObservedCity *)city;
-- (void)updateObservedCity:(ObservedCity *)city withIdentifier:(NSNumber *)identifier;
+- (void)updateObservedCity:(ObservedCity *)city;
+- (void)updateObservedCity:(ObservedCity *)city withForecast:(Forecast *)forecast;
 - (void)removeObservedCity:(ObservedCity *)city;
 - (BOOL)containsCity:(ObservedCity *)city;
 - (NSArray *)allCities;

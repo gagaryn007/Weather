@@ -14,7 +14,7 @@
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"ObservedCity"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"identifier = %@", city.identifier];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"cityId = %@", city.cityId];
     request.predicate = predicate;
     
     NSError *error = nil;
@@ -45,7 +45,12 @@
     [newCity setValue:city.cityName forKey:@"cityName"];
     [newCity setValue:city.lat forKey:@"lat"];
     [newCity setValue:city.lon forKey:@"lon"];
-    [newCity setValue:[self nextIdNumber] forKey:@"identifier"];
+    [newCity setValue:city.cityId forKey:@"cityId"];
+    
+    if (city.forecast != nil) {
+        NSManagedObject *forecast = [[[CoreDataForecastHelper alloc] init] addForecast:city.forecast];
+        [newCity setValue:forecast forKey:@"forecast"];
+    }
     
     NSManagedObject *sunInfo = [[[CoreDataSunInfoHelper alloc] init] addSunfInfo:city.sunInfo];
     [newCity setValue:sunInfo forKey:@"sunInfo"];
@@ -58,18 +63,52 @@
     }
 }
 
-- (void)updateObservedCity:(ObservedCity *)city withIdentifier:(NSNumber *)identifier
+- (void)updateObservedCity:(ObservedCity *)city
 {
-    city.identifier = identifier;
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"ObservedCity"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"cityId = %@", city.cityId];
+    request.predicate = predicate;
+    
+    Forecast *forecast = nil;
+    NSError *error = nil;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    if (error == nil) {
+        if ([result count] > 0) {
+            ObservedCity *obsCity = [result firstObject];
+            forecast = obsCity.forecast;
+        }
+    }
+    
+    city.forecast = forecast;
     [self removeObservedCity:city];
-    [self addObservedCity:city withIdentifier:identifier];
+    [self addObservedCity:city];
+}
+
+- (void)updateObservedCity:(ObservedCity *)city withForecast:(Forecast *)forecast
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"ObservedCity"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"cityId = %@", city.cityId];
+    request.predicate = predicate;
+    
+    NSError *error = nil;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    if (error == nil) {
+        if ([result count] > 0) {
+            NSManagedObject *city = [result firstObject];
+            [city setValue:[[[CoreDataForecastHelper alloc] init] addForecast:forecast] forKey:@"forecast"];
+            [context save:&error];
+        }
+    }
+
 }
 
 - (BOOL)containsCity:(ObservedCity *)city
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"ObservedCity"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"cityName = %@ AND lat = %@ AND lon = %@", city.cityName, city.lat, city.lon];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"cityId = %@", city.cityId];
     request.predicate = predicate;
     
     NSError *error = nil;
@@ -93,26 +132,6 @@
 
 #pragma mark - private
 
-- (void)addObservedCity:(ObservedCity *)city withIdentifier:(NSNumber *)identifier
-{
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSManagedObject *newCity = [NSEntityDescription insertNewObjectForEntityForName:@"ObservedCity" inManagedObjectContext:managedObjectContext];
-    [newCity setValue:city.cityName forKey:@"cityName"];
-    [newCity setValue:city.lat forKey:@"lat"];
-    [newCity setValue:city.lon forKey:@"lon"];
-    [newCity setValue:identifier forKey:@"identifier"];
-    
-    NSManagedObject *sunInfo = [[[CoreDataSunInfoHelper alloc] init] addSunfInfo:city.sunInfo];
-    [newCity setValue:sunInfo forKey:@"sunInfo"];
-    NSManagedObject *weatherConditions = [[[CoreDataWeatherConditions alloc] init] addWeatherConditions:city.weatherConditions];
-    [newCity setValue:weatherConditions forKey:@"weatherConditions"];
-    
-    NSError *error = nil;
-    if (![managedObjectContext save:&error]) {
-        NSLog(@"Error while saving: %@", error);
-    }
-}
-
 - (NSManagedObjectContext *)managedObjectContext
 {
     NSManagedObjectContext *context = nil;
@@ -122,27 +141,5 @@
     }
     return context;
 }
-
-
-- (NSNumber *)nextIdNumber
-{
-    NSArray *cities = [self allCities];
-    if ([cities count] > 0) {
-        NSArray *sorted = [cities sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            ObservedCity *city1 = obj1;
-            ObservedCity *city2 = obj2;
-            
-            return [city1.identifier compare:city2.identifier];
-        }];
-        
-        return [NSNumber numberWithInt:([[[sorted lastObject] valueForKey:@"identifier"] integerValue] + 1)];
-    } else {
-        return [NSNumber numberWithInt:0];
-    }
-    
-    return [NSNumber numberWithInt:0];
-}
-
-
 
 @end
