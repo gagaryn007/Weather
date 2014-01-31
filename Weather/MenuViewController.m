@@ -27,8 +27,8 @@
 {
     [super viewDidLoad];
     
-    self.ids = @[@"weather_now", @"your_localization", @"find_city"];
-    self.titles = @[@"Weather now", @"Your localization", @"Find city"];
+    self.ids = @[@"weather_now", @"your_localization", @"find_city", @"forecast"];
+    self.titles = @[@"Weather now", @"Your localization", @"Find city", @"Forecast"];
     self.tableView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.5];
 }
 

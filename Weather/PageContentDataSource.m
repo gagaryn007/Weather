@@ -21,7 +21,7 @@
     self = [super init];
     if (self != nil) {
         CoreDataObservedCityHelper *helper = [[CoreDataObservedCityHelper alloc] init];
-        self.cityList = [[helper listOfCities] mutableCopy];
+        self.cityList = [[helper allCities] mutableCopy];
     }
     
     return self;
@@ -33,7 +33,7 @@
     if ([viewController isKindOfClass:[WeatherViewController class]]) {
         index = ((WeatherViewController *) viewController).index;
     } else {
-        index = 0;
+        return nil;
     }
     
     if (index == NSNotFound) {
@@ -50,7 +50,7 @@
     if ([viewController isKindOfClass:[WeatherViewController class]]) {
         index = ((WeatherViewController *) viewController).index;
     } else {
-        index = 0;
+        return nil;
     }
     
     if ((index == 0) || (index == NSNotFound)) {
@@ -77,6 +77,8 @@
 
 - (void)removeCity:(ObservedCity *)city
 {
+    CoreDataObservedCityHelper *helper = [[CoreDataObservedCityHelper alloc] init];
+    [helper removeObservedCity:city];
     [self.cityList removeObject:city];
 }
 

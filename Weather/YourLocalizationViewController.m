@@ -98,7 +98,12 @@
 - (IBAction)addButtonDidClicked:(id)sender
 {
     CoreDataObservedCityHelper *helper = [[CoreDataObservedCityHelper alloc] init];
-    [helper addObservedCity:self.weatherViewController.city];
+    if ([helper containsCity:self.weatherViewController.city]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"City already is observed." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    } else {
+        [helper addObservedCity:self.weatherViewController.city];
+    }
 }
 
 @end

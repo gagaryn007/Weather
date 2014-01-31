@@ -15,12 +15,10 @@
 @interface CoreDataObservedCityHelper : NSObject
 
 - (void)addObservedCity:(ObservedCity *)city;
-- (void)updateObservedCity:(ObservedCity *)city;
+- (void)updateObservedCity:(ObservedCity *)city withIdentifier:(NSNumber *)identifier;
 - (void)removeObservedCity:(ObservedCity *)city;
-- (void)updateObservedCity:(ObservedCity *)city withSunInfo:(SunInfo *)sunInfo;
 - (BOOL)containsCity:(ObservedCity *)city;
-- (NSArray *)listOfCities;
+- (NSArray *)allCities;
 - (void)clear;
-- (ObservedCity *)cityWithName:(NSString *)cityName;
 
 @end

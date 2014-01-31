@@ -96,7 +96,6 @@
         [self.pageViewController setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
         [weatherViewController.view removeFromSuperview];
         [weatherViewController removeFromParentViewController];
-        [self.pageViewController reloadInputViews];
     }
 }
 

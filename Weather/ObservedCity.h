@@ -18,6 +18,7 @@
 @property (strong, nonatomic) SunInfo *sunInfo;
 @property (strong, nonatomic) NSNumber *lat;
 @property (strong, nonatomic) NSNumber *lon;
+@property (strong, nonatomic) NSNumber *identifier;
 
 - (id) initWithNSJSONDictionary:(NSDictionary *) dictionary;
 

@@ -24,7 +24,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qyr-tG-nE3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-40" y="580"/>
+            <point key="canvasLocation" x="-2536" y="1220"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="ieN-ig-PIg">
@@ -68,6 +68,17 @@
                                     <segue destination="toZ-8X-RVk" kind="custom" customClass="SWRevealViewControllerSegue" id="YPr-4m-DEe"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="forecast" id="1GD-aw-kjQ">
+                                <rect key="frame" x="0.0" y="154" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1GD-aw-kjQ" id="hwU-ZL-eb7">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="8b9-ec-Ykk" kind="custom" customClass="SWRevealViewControllerSegue" id="lAX-5O-C2X"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="LGB-NI-WSx" id="JeU-Yo-z3Z"/>
@@ -77,7 +88,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A4J-nw-Bgz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="590" y="-38"/>
+            <point key="canvasLocation" x="-1690" y="946"/>
         </scene>
         <!--Your Localization View Controller - Your localization-->
         <scene sceneID="doY-BE-RVi">
@@ -107,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hxl-26-3fS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1487" y="1337"/>
+            <point key="canvasLocation" x="-449" y="873"/>
         </scene>
         <!--Weather Pages View Controller - Weather now-->
         <scene sceneID="FfO-Mt-heM">
@@ -137,7 +148,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xVp-Wh-2oo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1487" y="612"/>
+            <point key="canvasLocation" x="-525" y="1644"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Oh5-Wa-tTc">
@@ -147,12 +158,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="u91-Wz-Vt4" kind="relationship" relationship="rootViewController" id="Evh-Uy-6ok"/>
+                        <segue destination="u91-Wz-Vt4" kind="relationship" relationship="rootViewController" id="uor-2l-k05"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhO-og-je6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="686" y="743"/>
+            <point key="canvasLocation" x="-1682" y="2055"/>
         </scene>
         <!--Weather View Controller - Weather now-->
         <scene sceneID="lPN-yh-C0P">
@@ -291,7 +302,7 @@ NW
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ju-WK-IsW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1897" y="641"/>
+            <point key="canvasLocation" x="297" y="1649"/>
         </scene>
         <!--Observed City Chooser View Controller - Find city-->
         <scene sceneID="UK6-Fb-j94">
@@ -367,7 +378,7 @@ NW
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RUR-aP-Ou5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2133" y="-82"/>
+            <point key="canvasLocation" x="-1163" y="350"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="zFb-sG-Wx6">
@@ -375,7 +386,7 @@ NW
                 <pageViewController storyboardIdentifier="page_view_controller" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="OCq-4f-94A" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JVU-tP-58w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1487" y="-61"/>
+            <point key="canvasLocation" x="-101" y="1644"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ej3-i8-fZ3">
@@ -420,7 +431,119 @@ NW
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Hy-Vr-tkM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2323" y="649"/>
+            <point key="canvasLocation" x="297" y="906"/>
+        </scene>
+        <!--Forecast Chooser View Controller - Forecast-->
+        <scene sceneID="1nB-fP-YpF">
+            <objects>
+                <tableViewController id="8b9-ec-Ykk" customClass="ForecastChooserViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="7LL-TN-Dx9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="forecast_cell" rowHeight="65" id="mkW-Vx-dil">
+                                <rect key="frame" x="0.0" y="86" width="320" height="65"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mkW-Vx-dil" id="jla-qK-zCU">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Forecast" id="P1d-ZI-hfK">
+                        <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" id="Yci-vp-NQV"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Ca6-Mb-YKs">
+                            <connections>
+                                <action selector="didClickEditButton:" destination="8b9-ec-Ykk" id="DbE-eC-b0v"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="editButton" destination="Ca6-Mb-YKs" id="DsQ-Z7-Jua"/>
+                        <outlet property="sidebarButton" destination="Yci-vp-NQV" id="tuF-Tj-ZQ3"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ESR-Gg-1ro" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-506" y="2391"/>
+        </scene>
+        <!--Weather Forecast View Controller-->
+        <scene sceneID="yq2-R3-NoV">
+            <objects>
+                <tableViewController storyboardIdentifier="weather_forecast_view_controller" id="XgA-Iv-Mh7" customClass="WeatherForecastViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LCN-0f-GLU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="HM9-Fo-lUd">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HM9-Fo-lUd" id="d6M-d4-276">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="XgA-Iv-Mh7" id="Uwm-ox-Ve1"/>
+                            <outlet property="delegate" destination="XgA-Iv-Mh7" id="icn-fO-S0h"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="72O-Rh-EOO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-54" y="2391"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="d9D-p2-CEs">
+            <objects>
+                <viewController storyboardIdentifier="loading_view_controller" id="pBJ-5b-GqX" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rbk-Db-fk5"/>
+                        <viewControllerLayoutGuide type="bottom" id="OpF-Un-6tH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="t2u-6c-FoR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Updating data. Please wait." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7gf-3s-VY5">
+                                <rect key="frame" x="40" y="239" width="240" height="89"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="2EN-C2-36T">
+                                <rect key="frame" x="142" y="336" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RBq-yt-LY5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="745" y="1649"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="efe-ol-5zh">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="bpI-zU-vZb" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="P32-HT-Btj"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nfQ-10-eKR">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8b9-ec-Ykk" kind="relationship" relationship="rootViewController" id="awB-Tj-BCp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3fC-IP-eBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1055" y="2391"/>
         </scene>
     </scenes>
     <resources>
@@ -432,7 +555,8 @@ NW
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Evh-Uy-6ok"/>
+        <segue reference="uor-2l-k05"/>
+        <segue reference="awB-Tj-BCp"/>
         <segue reference="6Mx-vO-Czq"/>
     </inferredMetricsTieBreakers>
 </document>

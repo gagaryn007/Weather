@@ -32,11 +32,7 @@
         NSLog(@"Error while saving: %@", error);
     }
     
-    NSLog(@"sunrise -> %@", [newSunInfo valueForKey:@"sunrise"]);
-    
     return newSunInfo;
 }
-
-
 
 @end

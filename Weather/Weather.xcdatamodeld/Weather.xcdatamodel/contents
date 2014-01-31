@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Forecast" syncable="YES">
+        <relationship name="weatherConditions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="WeatherConditions" syncable="YES"/>
+    </entity>
     <entity name="ObservedCity" syncable="YES">
         <attribute name="cityName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="forecast" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Forecast" syncable="YES"/>
         <relationship name="sunInfo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SunInfo" syncable="YES"/>
         <relationship name="weatherConditions" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="WeatherConditions" syncable="YES"/>
     </entity>
@@ -33,10 +38,11 @@
         <attribute name="speed" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ObservedCity" positionX="-171" positionY="63" width="128" height="133"/>
-        <element name="SunInfo" positionX="153" positionY="69" width="128" height="75"/>
-        <element name="Weather" positionX="115" positionY="-135" width="128" height="103"/>
-        <element name="WeatherConditions" positionX="-99" positionY="-189" width="128" height="163"/>
-        <element name="Wind" positionX="-360" positionY="-72" width="128" height="75"/>
+        <element name="Forecast" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ObservedCity" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="SunInfo" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Weather" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="WeatherConditions" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Wind" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

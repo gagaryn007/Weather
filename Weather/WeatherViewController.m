@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *centerWeatherLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightWeatherLabel;
 
+@property (weak, nonatomic) UIViewController *loadingViewController;
+
 @end
 
 @implementation WeatherViewController
@@ -36,12 +38,52 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self updateLayout];
+    if ([self shouldUpdateWeather:self.city]) {
+        self.loadingViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loading_view_controller"];
+        [self addChildViewController:self.loadingViewController];
+        [self.view addSubview:self.loadingViewController.view];
+        [self.loadingViewController didMoveToParentViewController:self];
+        
+        WeatherConnectionHelper *helper = [[WeatherConnectionHelper alloc] init];
+        helper.delegate = self;
+        [helper makeExplicitRequestWithLocations:[self.city.lat doubleValue] lon:[self.city.lon doubleValue]];
+    } else {
+        self.loadingViewController = nil;
+        
+        [self updateLayout];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - WeatherConnectionDelegate
+
+- (void)didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", error);
+}
+
+- (void)likeConnectionDidFinishedWithSucces:(NSArray *)cityList
+{
+    //unused
+}
+
+- (void)explicitConnectionDidFinishedWithSucces:(ObservedCity *)city
+{
+    [self.loadingViewController.view removeFromSuperview];
+    [self.loadingViewController removeFromParentViewController];
+    self.loadingViewController = nil;
+    
+    city.identifier = self.city.identifier;
+    self.city = city;
+    
+    [[[CoreDataObservedCityHelper alloc] init] updateObservedCity:self.city withIdentifier:self.city.identifier];
+    
+    [self updateLayout];
+    [self.view setNeedsDisplay];
 }
 
 #pragma mark - private methods
@@ -262,11 +304,9 @@
     
     NSComparisonResult comparison = [date compare:updateDate];
     if (comparison == NSOrderedDescending) {
-        NSLog(@"Should update.");
         return YES;
     }
     
-    NSLog(@"Shouldnt' update.");
     return NO;
 }
 
