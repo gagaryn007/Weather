@@ -19,13 +19,9 @@
     NSLog(@"%@", obj);
 }
 
-- (void)likeConnectionDidFinishedWithSucces:(NSArray *)cityList
-{
-}
-
 - (void)didFailWithError:(NSError *)error
 {
-    
+    NSLog(@"%@", error);
 }
 
 - (id)initWithStyle:(UITableViewStyle)style

@@ -74,7 +74,7 @@
 
 - (void)didFailWithError:(NSError *)error
 {
-    
+    NSLog(@"%@", error);
 }
 
 - (void)explicitConnectionDidFinishedWithSucces:(ObservedCity *)city
@@ -87,10 +87,6 @@
     [self.weatherViewController didMoveToParentViewController:self];
     
     self.addButton.enabled = YES;
-}
-
-- (void)likeConnectionDidFinishedWithSucces:(NSArray *)cityList
-{
 }
 
 #pragma mark - layout code

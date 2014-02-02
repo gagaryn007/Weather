@@ -11,7 +11,10 @@
 
 @protocol WeatherConnectionDelegate <NSObject>
 
+@required
 - (void)didFailWithError:(NSError *)error;
+
+@optional
 - (void)explicitConnectionDidFinishedWithSucces:(id)obj;
 - (void)likeConnectionDidFinishedWithSucces:(NSArray *)list;
 

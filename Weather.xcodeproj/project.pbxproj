@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2C02E3A1189AE78100C9341B /* ForecastChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C02E3A0189AE78100C9341B /* ForecastChooserViewController.m */; };
 		2C09BCF5189BBC2800207794 /* WeatherForecastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C09BCF4189BBC2800207794 /* WeatherForecastViewController.m */; };
+		2C3CE486189E5F1B00A66A79 /* ForecastParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3CE485189E5F1B00A66A79 /* ForecastParser.m */; };
+		2C3CE489189E5F9000A66A79 /* ExplicitParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3CE488189E5F9000A66A79 /* ExplicitParser.m */; };
+		2C3CE48C189E5FD700A66A79 /* LikeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3CE48B189E5FD700A66A79 /* LikeParser.m */; };
 		2C498CCF18928EFF00868DA9 /* WeatherPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C498CCE18928EFF00868DA9 /* WeatherPagesViewController.m */; };
 		2C498CD21892975E00868DA9 /* PageContentDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C498CD11892975E00868DA9 /* PageContentDataSource.m */; };
 		2C54086F1893E0E400B7E383 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C54086E1893E0E400B7E383 /* WeatherViewController.m */; };
@@ -70,6 +73,13 @@
 		2C02E3A0189AE78100C9341B /* ForecastChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastChooserViewController.m; sourceTree = "<group>"; };
 		2C09BCF3189BBC2800207794 /* WeatherForecastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherForecastViewController.h; sourceTree = "<group>"; };
 		2C09BCF4189BBC2800207794 /* WeatherForecastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherForecastViewController.m; sourceTree = "<group>"; };
+		2C3CE482189E5EAB00A66A79 /* ResponseParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResponseParser.h; sourceTree = "<group>"; };
+		2C3CE484189E5F1B00A66A79 /* ForecastParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForecastParser.h; sourceTree = "<group>"; };
+		2C3CE485189E5F1B00A66A79 /* ForecastParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastParser.m; sourceTree = "<group>"; };
+		2C3CE487189E5F9000A66A79 /* ExplicitParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplicitParser.h; sourceTree = "<group>"; };
+		2C3CE488189E5F9000A66A79 /* ExplicitParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplicitParser.m; sourceTree = "<group>"; };
+		2C3CE48A189E5FD700A66A79 /* LikeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeParser.h; sourceTree = "<group>"; };
+		2C3CE48B189E5FD700A66A79 /* LikeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeParser.m; sourceTree = "<group>"; };
 		2C498CCD18928EFF00868DA9 /* WeatherPagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherPagesViewController.h; sourceTree = "<group>"; };
 		2C498CCE18928EFF00868DA9 /* WeatherPagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherPagesViewController.m; sourceTree = "<group>"; };
 		2C498CD01892975E00868DA9 /* PageContentDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageContentDataSource.h; sourceTree = "<group>"; };
@@ -220,6 +230,20 @@
 			name = Menu;
 			sourceTree = "<group>";
 		};
+		2C3CE483189E5F0500A66A79 /* ResponseParser */ = {
+			isa = PBXGroup;
+			children = (
+				2C3CE482189E5EAB00A66A79 /* ResponseParser.h */,
+				2C3CE484189E5F1B00A66A79 /* ForecastParser.h */,
+				2C3CE485189E5F1B00A66A79 /* ForecastParser.m */,
+				2C3CE487189E5F9000A66A79 /* ExplicitParser.h */,
+				2C3CE488189E5F9000A66A79 /* ExplicitParser.m */,
+				2C3CE48A189E5FD700A66A79 /* LikeParser.h */,
+				2C3CE48B189E5FD700A66A79 /* LikeParser.m */,
+			);
+			name = ResponseParser;
+			sourceTree = "<group>";
+		};
 		2C498CD31892A69900868DA9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +310,7 @@
 		2C7FEDA11896B2A600E4F508 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				2C3CE483189E5F0500A66A79 /* ResponseParser */,
 				2C7FEDA21896B2FA00E4F508 /* WeatherConnectionDelegate.h */,
 				2C7FEDA31896B30B00E4F508 /* WeatherConnectionHelper.h */,
 				2C7FEDA41896B30B00E4F508 /* WeatherConnectionHelper.m */,
@@ -502,6 +527,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C3CE489189E5F9000A66A79 /* ExplicitParser.m in Sources */,
 				2C7FEDA01896AC9900E4F508 /* ObservedCityChooserViewController.m in Sources */,
 				2CA20AFF1891D1D400EC3151 /* Weather.xcdatamodeld in Sources */,
 				2C09BCF5189BBC2800207794 /* WeatherForecastViewController.m in Sources */,
@@ -513,8 +539,10 @@
 				2C54086F1893E0E400B7E383 /* WeatherViewController.m in Sources */,
 				2C894BBE189591F5006F2AD2 /* SWRevealViewController.m in Sources */,
 				2C54087F189450E700B7E383 /* WeatherConditions.m in Sources */,
+				2C3CE486189E5F1B00A66A79 /* ForecastParser.m in Sources */,
 				2C894BB818954B7A006F2AD2 /* CoreDataWindHelper.m in Sources */,
 				2C02E3A1189AE78100C9341B /* ForecastChooserViewController.m in Sources */,
+				2C3CE48C189E5FD700A66A79 /* LikeParser.m in Sources */,
 				2C6CDE9A189C1BA700B0CA81 /* Forecast.m in Sources */,
 				2C6CDE9D189C1DBA00B0CA81 /* CoreDataForecastHelper.m in Sources */,
 				2C894BB21895424F006F2AD2 /* CoreDataSunInfoHelper.m in Sources */,

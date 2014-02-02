@@ -7,13 +7,15 @@
 //
 
 #import "WeatherConnectionHelper.h"
+#import "ResponseParser.h"
+#import "ForecastParser.h"
+#import "ExplicitParser.h"
+#import "LikeParser.h"
 
 @interface WeatherConnectionHelper()
 
-@property (nonatomic) BOOL explicit;
-@property (nonatomic) BOOL forecast;
-
 @property (strong, nonatomic) NSMutableData *receivedData;
+@property (strong, nonatomic) id<ResponseParser> parser;
 
 @end
 
@@ -50,50 +52,32 @@
         return;
     }
 
-    NSString *msgError = [jsonResultDict objectForKey:@"message"];
-    if (msgError != nil && ![msgError isEqual:@"like"]) {
+    NSString *msg = [jsonResultDict objectForKey:@"message"];
+    NSString *cod = [jsonResultDict objectForKey:@"cod"];
+    if (cod != nil && [cod isEqual:@"404"]) {
         if (self.delegate != nil) {
-            NSDictionary *userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(msgError, nil),
-                                       NSLocalizedFailureReasonErrorKey: NSLocalizedString(msgError, nil),
-                                       NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Enter proper city name or give up", nil)};
+            NSDictionary *userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(msg, nil),
+                                       NSLocalizedFailureReasonErrorKey: NSLocalizedString(msg, nil),
+                                       NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(msg, nil)};
             
-            NSError *error = [NSError errorWithDomain:@"Weather" code:-69 userInfo:userInfo];
+            NSError *error = [NSError errorWithDomain:@"Weather" code:404 userInfo:userInfo];
             [self.delegate didFailWithError:error];
         }
         return;
     }
     
-    if (self.explicit && !self.forecast) {
-        ObservedCity *city = [[ObservedCity alloc] initWithNSJSONDictionary:jsonResultDict];
-        if (self.delegate != nil) {
-            [self.delegate explicitConnectionDidFinishedWithSucces:city];
-        }
-    } else if (!self.explicit && !self.forecast) {
-        NSMutableArray *cityList = [[NSMutableArray alloc] init];
-        NSArray *cityJsonList = [jsonResultDict objectForKey:@"list"];
-        for (NSDictionary *dictionary in cityJsonList) {
-            ObservedCity *city = [[ObservedCity alloc] initWithNSJSONDictionary:dictionary];
-            [cityList addObject:city];
-        }
-        
-        if (self.delegate != nil) {
-            [self.delegate likeConnectionDidFinishedWithSucces:cityList];
-        }
-    } else if (self.explicit && self.forecast) {
-        NSLog(@"POZDRO");
-        [self.delegate explicitConnectionDidFinishedWithSucces:jsonResultDict];
-    }
+    [self.parser parseNSJSONDictionary:jsonResultDict withDelegate:self.delegate];
 }
 
 #pragma mark - WeatherConnectionHelper
 
 - (void)makeExplicitRequest:(NSNumber *)cityId
 {
-    self.explicit = YES;
-    
     if (cityId == nil) {
         return;
     }
+    
+    self.parser = [[ExplicitParser alloc] init];
     
     NSString *query = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?id=%@", cityId];
     
@@ -104,12 +88,11 @@
 
 - (void)makeLikeRequest:(NSString *)city
 {
-    self.explicit = NO;
-    self.forecast = NO;
-    
     if (city == nil) {
         return;
     }
+    
+    self.parser = [[LikeParser alloc] init];
     
     NSString *cityForURL = [city stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSString *query = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/find?q=%@&type=like", cityForURL];
@@ -121,8 +104,7 @@
 
 - (void)makeExplicitRequestWithLocations:(double)lat lon:(double)lon
 {
-    self.explicit = YES;
-    self.forecast = NO;
+    self.parser = [[ExplicitParser alloc] init];
     
     NSString *query = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%lf&lon=%lf", lat, lon];
     NSURL *url = [NSURL URLWithString:query];
@@ -132,8 +114,7 @@
 
 - (void)makeForecastRequest:(NSNumber *)cityId
 {
-    self.explicit = YES;
-    self.forecast = YES;
+    self.parser = [[ForecastParser alloc] init];
     
     NSString *query = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast/daily?id=%@&cnt=7", cityId];
     NSURL *url = [NSURL URLWithString:query];

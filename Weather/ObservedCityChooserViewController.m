@@ -80,8 +80,11 @@
     ObservedCity *city = [self.cityList objectAtIndex:indexPath.row];
     NSMutableString *cityNameAndCountry = [[NSMutableString alloc] init];
     [cityNameAndCountry appendString:city.cityName];
-    [cityNameAndCountry appendString:@", "];
-    [cityNameAndCountry appendString:city.country];
+
+    if (city.country != nil) {
+        [cityNameAndCountry appendString:@", "];
+        [cityNameAndCountry appendString:city.country];
+    }
     
     cityLabel.text = cityNameAndCountry;
     

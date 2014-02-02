@@ -67,11 +67,6 @@
     NSLog(@"%@", error);
 }
 
-- (void)likeConnectionDidFinishedWithSucces:(NSArray *)cityList
-{
-    //unused
-}
-
 - (void)explicitConnectionDidFinishedWithSucces:(ObservedCity *)city
 {
     [self.loadingViewController.view removeFromSuperview];
