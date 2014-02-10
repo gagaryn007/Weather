@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 Bartłomiej Oziębło. All rights reserved.
 //
 
-#import "CoreDataWeatherConditions.h"
+#import "CoreDataWeatherConditionsHelper.h"
+#import "CoreDataTemperatureHelper.h"
 
-@implementation CoreDataWeatherConditions
+@implementation CoreDataWeatherConditionsHelper
 
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -26,9 +27,6 @@
     NSManagedObject *newWeatherConditions = [NSEntityDescription insertNewObjectForEntityForName:@"WeatherConditions" inManagedObjectContext:context];
     [newWeatherConditions setValue:weatherConditions.humidity forKey:@"humidity"];
     [newWeatherConditions setValue:weatherConditions.pressure forKey:@"pressure"];
-    [newWeatherConditions setValue:weatherConditions.temp forKey:@"temp"];
-    [newWeatherConditions setValue:weatherConditions.temp_max forKey:@"temp_max"];
-    [newWeatherConditions setValue:weatherConditions.temp_min forKey:@"temp_min"];
     [newWeatherConditions setValue:[[[CoreDataWindHelper alloc] init] addWind:weatherConditions.wind] forKey:@"wind"];
     [newWeatherConditions setValue:weatherConditions.updateDate forKey:@"updateDate"];
     
@@ -40,6 +38,9 @@
     
     [newWeatherConditions setValue:[[NSSet alloc] initWithArray:weatherArray] forKey:@"weather"];
     [newWeatherConditions setValue:weatherConditions.date forKey:@"date"];
+    
+    CoreDataTemperatureHelper *temperatureHelper = [[CoreDataTemperatureHelper alloc] init];
+    [newWeatherConditions setValue:[temperatureHelper addTemperature:weatherConditions.temperature] forKey:@"temperature"];
     
     NSError *error = nil;
     if (![context save:&error]) {

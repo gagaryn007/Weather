@@ -10,7 +10,6 @@
 
 @interface Forecast : NSObject
 
-@property (strong, nonatomic) NSDate *updateDate;
 @property (strong, nonatomic) NSSet *weatherConditions;
 
 - (id)initWithNSJSONDictionary:(NSDictionary *)dictionary;

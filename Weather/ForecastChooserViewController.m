@@ -63,11 +63,25 @@
     ObservedCity *city = [self.cities objectAtIndex:indexPath.row];
     NSString *icon = [[[city.weatherConditions.weather allObjects] objectAtIndex:0] valueForKey:@"icon"];
     NSString *timeOfDay = [icon substringWithRange:NSMakeRange([icon length] - 1, 1)];
-    UIColor *color = [[[ColorSelector alloc] init] colorForTemperature:city.weatherConditions.temp andTimeOfDay:timeOfDay];
+    UIColor *color = [[[ColorChooser alloc] init] colorForTemperature:city.weatherConditions.temperature.temp andTimeOfDay:timeOfDay];
     
+    cell.textLabel.alpha = 0;
     cell.backgroundColor = color;
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.text = [[self.cities objectAtIndex:indexPath.row] valueForKey:@"cityName"];
+    
+    CGRect frame = cell.textLabel.frame;
+    CGRect newFrame = cell.textLabel.frame;
+    
+    newFrame.origin.x += 1000;
+    cell.textLabel.frame = newFrame;
+    
+    frame.origin.x -= 1000;
+    
+    [UIView animateWithDuration:1.0 animations:^{
+        cell.textLabel.frame = frame;
+        cell.textLabel.alpha = 1;
+    }];
     
     return cell;
 }

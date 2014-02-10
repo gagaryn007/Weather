@@ -7,6 +7,7 @@
 //
 
 #import "CoreDataForecastHelper.h"
+#import "CoreDataWeatherConditionsHelper.h"
 
 @implementation CoreDataForecastHelper
 
@@ -24,8 +25,14 @@
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     NSManagedObject *newForecast = [NSEntityDescription insertNewObjectForEntityForName:@"Forecast" inManagedObjectContext:context];
-    [newForecast setValue:forecast.updateDate forKey:@"updateDate"];
-    [newForecast setValue:forecast.weatherConditions forKey:@"weatherConditions"];
+    
+    CoreDataWeatherConditionsHelper *helper = [[CoreDataWeatherConditionsHelper alloc] init];
+    NSMutableArray *weatherList = [[NSMutableArray alloc] init];
+    for (WeatherConditions *weather in forecast.weatherConditions) {
+        [weatherList addObject:[helper addWeatherConditions:weather]];
+    }
+    
+    [newForecast setValue:[[NSSet alloc] initWithArray:weatherList] forKey:@"weatherConditions"];
     
     NSError *error = nil;
     if (![context save:&error]) {

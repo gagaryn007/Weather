@@ -15,7 +15,7 @@
 
 @property (strong, nonatomic) CLLocationManager *manager;
 @property (strong, nonatomic) WeatherConnectionHelper *helper;
-@property (strong, nonatomic) WeatherViewController *weatherViewController;
+@property (strong, nonatomic) UIViewController *viewController;
 
 @end
 
@@ -31,6 +31,11 @@
 {
     [super viewDidLoad];
 
+    self.viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loading_view_controller"];
+    [self addChildViewController:self.viewController];
+    [self.view addSubview:self.viewController.view];
+    [self.viewController didMoveToParentViewController:self];
+    
     self.addButton.enabled = NO;
     
     self.helper = [[WeatherConnectionHelper alloc] init];
@@ -62,7 +67,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     if ([locations count] > 0) {
-        CLLocation *location = [locations objectAtIndex:0];
+        CLLocation *location = [locations lastObject];
         
         [self.helper makeExplicitRequestWithLocations:location.coordinate.latitude lon:location.coordinate.longitude];
     }
@@ -79,12 +84,12 @@
 
 - (void)explicitConnectionDidFinishedWithSucces:(ObservedCity *)city
 {
-    self.weatherViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"weather_view_controller"];
-    self.weatherViewController.city  = city;
+    self.viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"weather_view_controller"];
+    ((WeatherViewController *) self.viewController).city  = city;
     
-    [self addChildViewController:self.weatherViewController];
-    [self.view addSubview:self.weatherViewController.view];
-    [self.weatherViewController didMoveToParentViewController:self];
+    [self addChildViewController:self.viewController];
+    [self.view addSubview:self.viewController.view];
+    [self.viewController didMoveToParentViewController:self];
     
     self.addButton.enabled = YES;
 }
@@ -93,12 +98,13 @@
 
 - (IBAction)addButtonDidClicked:(id)sender
 {
+    ObservedCity *city = ((WeatherViewController *) self.viewController).city;
     CoreDataObservedCityHelper *helper = [[CoreDataObservedCityHelper alloc] init];
-    if ([helper containsCity:self.weatherViewController.city]) {
+    if ([helper containsCity:city]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"City already is observed." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     } else {
-        [helper addObservedCity:self.weatherViewController.city];
+        [helper addObservedCity:city];
     }
 }
 

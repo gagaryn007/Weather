@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CoreDataObservedCityHelper.h"
 #import "SWRevealViewController.h"
-#import "ColorSelector.h"
+#import "ColorChooser.h"
 #import "WeatherForecastViewController.h"
 
 @interface ForecastChooserViewController : UITableViewController

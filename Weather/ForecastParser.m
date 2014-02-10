@@ -7,12 +7,14 @@
 //
 
 #import "ForecastParser.h"
+#import "Forecast.h"
 
 @implementation ForecastParser
 
 - (void)parseNSJSONDictionary:(NSDictionary *)dictionary withDelegate:(id<WeatherConnectionDelegate>)delegate
 {
-    [delegate explicitConnectionDidFinishedWithSucces:dictionary];
+    Forecast *forecast = [[Forecast alloc] initWithNSJSONDictionary:dictionary];
+    [delegate explicitConnectionDidFinishedWithSucces:forecast];
 }
 
 @end

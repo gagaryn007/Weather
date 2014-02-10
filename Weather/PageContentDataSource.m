@@ -11,6 +11,7 @@
 @interface PageContentDataSource()
 
 @property (strong, nonatomic) NSMutableArray *cityList;
+@property (strong, nonatomic) CoreDataObservedCityHelper *helper;
 
 @end
 
@@ -20,8 +21,8 @@
 {
     self = [super init];
     if (self != nil) {
-        CoreDataObservedCityHelper *helper = [[CoreDataObservedCityHelper alloc] init];
-        self.cityList = [[helper allCities] mutableCopy];
+        self.helper = [[CoreDataObservedCityHelper alloc] init];
+        self.cityList = [[self.helper allCities] mutableCopy];
     }
     
     return self;
@@ -77,8 +78,8 @@
 
 - (void)removeCity:(ObservedCity *)city
 {
-    CoreDataObservedCityHelper *helper = [[CoreDataObservedCityHelper alloc] init];
-    [helper removeObservedCity:city];
+    self.helper = [[CoreDataObservedCityHelper alloc] init];
+    [self.helper removeObservedCity:city];
     [self.cityList removeObject:city];
 }
 

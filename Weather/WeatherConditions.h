@@ -9,19 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "Wind.h"
 #import "Weather.h"
+#import "Temperature.h"
 
 @interface WeatherConditions : NSObject
 
 @property (nonatomic, strong) NSNumber *humidity;
 @property (nonatomic, strong) NSNumber *pressure;
-@property (nonatomic, strong) NSNumber *temp;
-@property (nonatomic, strong) NSNumber *temp_min;
-@property (nonatomic, strong) NSNumber *temp_max;
 @property (nonatomic, strong) Wind *wind;
 @property (nonatomic, strong) NSSet *weather;
 @property (nonatomic, strong) NSDate *updateDate;
 @property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) Temperature *temperature;
 
 - (id) initWithNSJSONDictionary:(NSDictionary *)dictionary;
+- (id) initWithNSJSONDictionary:(NSDictionary *)dictionary andTemperatureNSJSONDictionary:(NSDictionary *)tempDictionary;
 
 @end

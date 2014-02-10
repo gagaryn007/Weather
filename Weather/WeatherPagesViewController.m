@@ -7,7 +7,7 @@
 //
 
 #import "WeatherPagesViewController.h"
-#import "ColorSelector.h"
+#import "ColorChooser.h"
 
 @interface WeatherPagesViewController ()
 
@@ -93,9 +93,9 @@
             self.trashButton.enabled = NO;
         }
         
-        [self.pageViewController setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
         [weatherViewController.view removeFromSuperview];
         [weatherViewController removeFromParentViewController];
+        [self.pageViewController setViewControllers:@[viewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }
 }
 

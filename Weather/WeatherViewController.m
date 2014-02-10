@@ -91,7 +91,7 @@
     self.cityNameLabel.text = self.city.cityName;
     self.dateLabel.text = [self stringFromDate:self.city.weatherConditions.date];
     self.fullInfoTextView.attributedText = [self stringFromFullInfo];
-    self.tempLabel.text = [NSString stringWithFormat:@"%.1lf°C", ([self.city.weatherConditions.temp doubleValue] - 273.15)];
+    self.tempLabel.text = [NSString stringWithFormat:@"%.1lf°C", ([self.city.weatherConditions.temperature.temp doubleValue] - 273.15)];
     
     BOOL flag = YES;
     NSString *timeOfDay = nil;
@@ -141,9 +141,9 @@
         }
     }
     
-    ColorSelector *colorSelector = [[ColorSelector alloc] init];
+    ColorChooser *colorSelector = [[ColorChooser alloc] init];
     
-    NSNumber *temp = self.city.weatherConditions.temp;
+    NSNumber *temp = self.city.weatherConditions.temperature.temp;
     UIColor *color = [colorSelector colorForTemperature:temp andTimeOfDay:timeOfDay];
     self.fullInfoTextView.backgroundColor = color;
     self.fullInfoLegendTextView.backgroundColor = color;
@@ -154,8 +154,8 @@
 {
     NSString *humidity = [NSString stringWithFormat:@"%@ %%", self.city.weatherConditions.humidity];
     NSString *pressure = [NSString stringWithFormat:@"%@ hPa", self.city.weatherConditions.pressure];
-    NSString *maxTemp = [NSString stringWithFormat:@"%.1lf°C", ([self.city.weatherConditions.temp_max doubleValue] - 273.15)];
-    NSString *minTemp = [NSString stringWithFormat:@"%.1lf°C", ([self.city.weatherConditions.temp_min doubleValue] - 273.15)];
+    NSString *maxTemp = [NSString stringWithFormat:@"%.1lf°C", ([self.city.weatherConditions.temperature.temp_max doubleValue] - 273.15)];
+    NSString *minTemp = [NSString stringWithFormat:@"%.1lf°C", ([self.city.weatherConditions.temperature.temp_min doubleValue] - 273.15)];
 
     NSString *windSpeed = [NSString stringWithFormat:@"%.2lf mps", [self.city.weatherConditions.wind.speed doubleValue]];
     NSString *windDirection = [NSString stringWithFormat:@"%@", [self stringForWindDirection:self.city.weatherConditions.wind.deg]];

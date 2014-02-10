@@ -54,7 +54,7 @@
     
     NSManagedObject *sunInfo = [[[CoreDataSunInfoHelper alloc] init] addSunfInfo:city.sunInfo];
     [newCity setValue:sunInfo forKey:@"sunInfo"];
-    NSManagedObject *weatherConditions = [[[CoreDataWeatherConditions alloc] init] addWeatherConditions:city.weatherConditions];
+    NSManagedObject *weatherConditions = [[[CoreDataWeatherConditionsHelper alloc] init] addWeatherConditions:city.weatherConditions];
     [newCity setValue:weatherConditions forKey:@"weatherConditions"];
     
     NSError *error = nil;
@@ -70,19 +70,21 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"cityId = %@", city.cityId];
     request.predicate = predicate;
     
-    Forecast *forecast = nil;
     NSError *error = nil;
     NSArray *result = [context executeFetchRequest:request error:&error];
     if (error == nil) {
         if ([result count] > 0) {
-            ObservedCity *obsCity = [result firstObject];
-            forecast = obsCity.forecast;
+            NSManagedObject *obsCity = [result firstObject];
+            
+            NSManagedObject *forecast = [[[CoreDataForecastHelper alloc] init] addForecast:city.forecast];
+            [obsCity setValue:forecast forKey:@"forecast"];
+            
+            [context save:&error];
+            if (error != nil) {
+                NSLog(@"%@", error);
+            }
         }
     }
-    
-    city.forecast = forecast;
-    [self removeObservedCity:city];
-    [self addObservedCity:city];
 }
 
 - (void)updateObservedCity:(ObservedCity *)city withForecast:(Forecast *)forecast
@@ -96,12 +98,17 @@
     NSArray *result = [context executeFetchRequest:request error:&error];
     if (error == nil) {
         if ([result count] > 0) {
-            NSManagedObject *city = [result firstObject];
-            [city setValue:[[[CoreDataForecastHelper alloc] init] addForecast:forecast] forKey:@"forecast"];
+            NSManagedObject *obsCity = [result firstObject];
+            
+            NSManagedObject *forecastObj = [[[CoreDataForecastHelper alloc] init] addForecast:forecast];
+            [obsCity setValue:forecastObj forKey:@"forecast"];
+            
             [context save:&error];
+            if (error != nil) {
+                NSLog(@"%@", error);
+            }
         }
     }
-
 }
 
 - (BOOL)containsCity:(ObservedCity *)city

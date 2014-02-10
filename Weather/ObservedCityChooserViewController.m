@@ -88,7 +88,7 @@
     
     cityLabel.text = cityNameAndCountry;
     
-    double celsiusTemp = [city.weatherConditions.temp doubleValue] - 273.15;
+    double celsiusTemp = [city.weatherConditions.temperature.temp doubleValue] - 273.15;
     NSString *celsiusTempStr = [NSString stringWithFormat:@"%.1lf°C", celsiusTemp];
     tempLabel.text = celsiusTempStr;
     
@@ -123,7 +123,7 @@
         index++;
     }
     
-    cell.backgroundColor = [[[ColorSelector alloc] init] colorForTemperature:city.weatherConditions.temp andTimeOfDay:timeOfDay];
+    cell.backgroundColor = [[[ColorChooser alloc] init] colorForTemperature:city.weatherConditions.temperature.temp andTimeOfDay:timeOfDay];
     
     if ([self.selectionList containsObject:city]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

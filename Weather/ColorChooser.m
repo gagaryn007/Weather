@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Bartłomiej Oziębło. All rights reserved.
 //
 
-#import "ColorSelector.h"
+#import "ColorChooser.h"
 
-@implementation ColorSelector
+@implementation ColorChooser
 
 - (UIColor *)colorForTemperature:(NSNumber *)kelvinTemp andTimeOfDay:(NSString *)timeOfDay
 {

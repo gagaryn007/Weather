@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ObservedCity.h"
 #import "CoreDataSunInfoHelper.h"
-#import "CoreDataWeatherConditions.h"
+#import "CoreDataWeatherConditionsHelper.h"
 #import "CoreDataForecastHelper.h"
 #import "WeatherConditions.h"
 

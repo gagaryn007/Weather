@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ObservedCity.h"
 #import "SWRevealViewController.h"
-#import "ColorSelector.h"
+#import "ColorChooser.h"
 #import "WeatherConnectionDelegate.h"
 #import "WeatherConnectionHelper.h"
 #import "CoreDataObservedCityHelper.h"

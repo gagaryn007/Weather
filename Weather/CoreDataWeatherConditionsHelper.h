@@ -12,7 +12,7 @@
 #import "WeatherConditions.h"
 #import "Wind.h"
 
-@interface CoreDataWeatherConditions : NSObject
+@interface CoreDataWeatherConditionsHelper : NSObject
 
 - (id)addWeatherConditions:(WeatherConditions *)weatherConditions;
 

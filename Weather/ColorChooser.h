@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "UIColorPastelFactory.h"
 
-@interface ColorSelector : NSObject
+@interface ColorChooser : NSObject
 
 - (UIColor *)colorForTemperature:(NSNumber *)kelvinTemp andTimeOfDay:(NSString *)timeOfDay;
 

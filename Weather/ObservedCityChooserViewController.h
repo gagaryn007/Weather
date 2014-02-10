@@ -13,7 +13,7 @@
 #import "WeatherConnectionDelegate.h"
 #import "WeatherConnectionHelper.h"
 #import "CoreDataObservedCityHelper.h"
-#import "ColorSelector.h"
+#import "ColorChooser.h"
 
 @interface ObservedCityChooserViewController : UITableViewController <UISearchBarDelegate, WeatherConnectionDelegate>
 
