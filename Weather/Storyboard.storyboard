@@ -150,129 +150,6 @@
             </objects>
             <point key="canvasLocation" x="-525" y="1644"/>
         </scene>
-        <!--Weather Map View Controller - Weather-->
-        <scene sceneID="Y1I-zI-IU4">
-            <objects>
-                <viewController id="8OY-ia-NdA" customClass="WeatherMapViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="coI-AD-aCC"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfi-on-gjY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="sWg-Zm-waM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V10-57-k5I">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Weather" image="weather.png" id="wZV-1O-7QO"/>
-                    <connections>
-                        <outlet property="webView" destination="V10-57-k5I" id="Gc3-Fa-4N2"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lrL-RS-pCf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1960" y="2605"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="cDW-aM-Lx3">
-            <objects>
-                <navigationController definesPresentationContext="YES" id="m2e-IF-KkL" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rNz-No-cD3">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="DU9-SN-1gj" kind="relationship" relationship="rootViewController" id="0IO-cP-XZe"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SGG-8p-PNy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2982" y="2948"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="hgK-T0-Jb7">
-            <objects>
-                <tabBarController definesPresentationContext="YES" id="DU9-SN-1gj" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="U1W-uM-LkZ"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="dfp-tX-ZP9">
-                        <rect key="frame" x="129" y="330" width="163" height="49"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="8OY-ia-NdA" kind="relationship" relationship="viewControllers" id="tR3-NE-r1Y"/>
-                        <segue destination="FPy-ZX-Svi" kind="relationship" relationship="viewControllers" id="BFd-cf-l3F"/>
-                        <segue destination="e30-XT-yW6" kind="relationship" relationship="viewControllers" id="9Wp-ei-4nr"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q3D-li-7RL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2499" y="2948"/>
-        </scene>
-        <!--Precipitations Map View Controller - Precipitations-->
-        <scene sceneID="1ZF-fG-Czj">
-            <objects>
-                <viewController id="e30-XT-yW6" customClass="PrecipitationsMapViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="3Hs-gN-9ya"/>
-                        <viewControllerLayoutGuide type="bottom" id="guN-gc-gMi"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Tyw-fx-hKB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VZZ-oP-D3I">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Precipitations" image="rain.png" id="N8U-VP-TlD"/>
-                    <connections>
-                        <outlet property="webView" destination="VZZ-oP-D3I" id="R8v-Ib-H7x"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ig6-Vs-2Q9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1946" y="3979"/>
-        </scene>
-        <!--Clouds Map View Controller - Clouds-->
-        <scene sceneID="6L0-zg-vZ5">
-            <objects>
-                <viewController id="FPy-ZX-Svi" customClass="CloudsMapViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ku2-2n-x2z"/>
-                        <viewControllerLayoutGuide type="bottom" id="gXH-vP-2RQ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3Qy-6x-5dB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G2t-o9-QYn">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="520"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Clouds" image="clouds.png" id="xOf-HG-h0C"/>
-                    <connections>
-                        <outlet property="webView" destination="G2t-o9-QYn" id="Egg-wo-Nlc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RbU-mA-E3w" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1965" y="3274"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Oh5-Wa-tTc">
             <objects>
@@ -745,10 +622,7 @@ NW
         </scene>
     </scenes>
     <resources>
-        <image name="clouds.png" width="214" height="211"/>
-        <image name="rain.png" width="213" height="209"/>
         <image name="reveal-icon.png" width="22" height="17"/>
-        <image name="weather.png" width="213" height="215"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

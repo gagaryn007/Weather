@@ -70,7 +70,14 @@
             return [weather1.date compare:weather2.date];
         }];
         
-        [self.tableView reloadData];
+        if ([self shouldUpdateForecast]) {
+            WeatherConnectionHelper *helper = [[WeatherConnectionHelper alloc] init];
+            helper.delegate = self;
+            
+            [helper makeForecastRequest:self.city.cityId];
+        } else {
+            [self.tableView reloadData];
+        }
     }
 }
 
@@ -170,6 +177,26 @@
 - (void)segmentedControlDidChange:(id)sender
 {
     [self.tableView reloadData];
+}
+
+#pragma mark - private
+
+- (BOOL)shouldUpdateForecast
+{
+    NSDateComponents *offset = [[NSDateComponents alloc] init];
+    offset.day = -2;
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate *forecastDate = [[self.weatherConditions firstObject] valueForKey:@"date"];
+    NSDate *dateNow = [NSDate date];
+    
+    NSDate *date = [calendar dateByAddingComponents:offset toDate:dateNow options:0];
+    NSComparisonResult result = [date compare:forecastDate];
+    
+    if (result == NSOrderedDescending) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end
