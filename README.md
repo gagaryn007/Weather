@@ -19,4 +19,5 @@ http://www.app.sm-artists.com
 
 
 OpenWeatherMap.org API for free use
+<br />
 http://openweathermap.org/API
