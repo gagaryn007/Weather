@@ -21,3 +21,8 @@ http://www.app.sm-artists.com
 OpenWeatherMap.org API for free use
 <br />
 http://openweathermap.org/API
+
+
+SWRevealViewController
+<br />
+https://github.com/John-Lluch/SWRevealViewController
